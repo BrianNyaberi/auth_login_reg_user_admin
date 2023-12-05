@@ -18,6 +18,11 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+    public function users() 
+    {
+        return view('register.users');
+    }
+
     /**
      * Handle account registration request
      * 
@@ -25,12 +30,18 @@ class RegisterController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function register(RegisterRequest $request) 
+    public function register(RegisterRequest $request)
     {
         $user = User::create($request->validated());
 
-        auth()->login($user);
+        if ($user->role === 1) {
+            auth()->login($user);
 
-        return redirect('/')->with('success', "Account successfully registered.");
+            return redirect('/')->with('success', "Account successfully registered.");
+        } else {
+            auth()->login($user);
+
+            return redirect('/users')->with('success', "Account successfully registered.");        
+        }
     }
 }

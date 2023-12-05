@@ -19,6 +19,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/home', 'HomeController@users')->name('singleUser.users');
 
     Route::group(['middleware' => ['guest']], function() {
         /**
@@ -26,12 +27,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform');
+        Route::get('/users', 'RegisterController@users')->name('register.users');
 
         /**
          * Login Routes
          */
         Route::get('/login', 'LoginController@show')->name('login.show');
         Route::post('/login', 'LoginController@login')->name('login.perform');
+        Route::get('/users', 'LoginController@users')->name('login.users');
 
     });
 

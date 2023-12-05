@@ -21,6 +21,11 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function users() 
+    {
+        return view('login.users');
+    }
+
     /**
      * Handle account login request
      * 
@@ -58,6 +63,10 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user) 
     {
-        return redirect()->intended();
+        if ($user['role'] === 1) {
+            return redirect('/')->with('success', "Logged in successfully as role 1.");
+        } else {
+            return redirect('/users')->with('success', "Logged in successfully as other role.");
+        }
     }
 }
