@@ -21,8 +21,10 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function users() 
+    public function users(LoginRequest $request) 
     {
+        $users = $request->getAllUsers();
+
         return view('login.users');
     }
 
@@ -69,4 +71,14 @@ class LoginController extends Controller
             return redirect('/users')->with('success', "Logged in successfully as other role.");
         }
     }
+
+    function list(LoginRequest $request) 
+    {
+        $users = $request->getAllUsers();
+
+        // return view('/list', compact('users'));
+
+        return $users;
+    }
+    
 }

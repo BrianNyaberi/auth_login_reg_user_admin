@@ -6,6 +6,7 @@
         <h1>Users Dashboard</h1>
         <p class="lead">Only authenticated users can access this section.</p>
 
+
         @endauth
 
         @guest

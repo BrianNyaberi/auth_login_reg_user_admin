@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
@@ -52,6 +53,14 @@ class LoginRequest extends FormRequest
         }
 
         return $this->only('username', 'password');
+    }
+
+    public function getAllUsers()
+    {
+        // Fetch all users from the database
+        $users = User::all();
+
+        return $users;
     }
 
     /**
